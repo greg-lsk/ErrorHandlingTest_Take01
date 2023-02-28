@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer", "ApiServer\ApiS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Core\Domain\Domain.csproj", "{F569BC1C-EFE3-43A0-892C-20733A775B13}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Infrastructure\Persistence\Persistence.csproj", "{5618EF01-8A8F-4BC2-BDA0-F1C7BDE70572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelDirector", "Infrastructure\ModelDirector\ModelDirector.csproj", "{5618EF01-8A8F-4BC2-BDA0-F1C7BDE70572}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EB507B4A-3DDF-411C-8EC5-59BC59DC15A9} = {EB507B4A-3DDF-411C-8EC5-59BC59DC15A9}
 		{F569BC1C-EFE3-43A0-892C-20733A775B13} = {F569BC1C-EFE3-43A0-892C-20733A775B13}
