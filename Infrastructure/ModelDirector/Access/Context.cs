@@ -33,10 +33,14 @@ public class Context : DbContext, IDataAccessor
 
         var connectionString = 
             $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=True";
-        
+
+        /*        optionsBuilder.UseSqlServer(
+                    connectionString,
+                    b => b.MigrationsAssembly(typeof(Context).Assembly.FullName)*/
+
         optionsBuilder.UseSqlServer(
             connectionString,
-            b => b.MigrationsAssembly(typeof(Context).Assembly.FullName)
+            b => b.MigrationsAssembly("Migrations")
         );
     }
 
