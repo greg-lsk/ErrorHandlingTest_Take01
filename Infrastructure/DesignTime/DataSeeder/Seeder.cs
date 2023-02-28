@@ -1,8 +1,8 @@
-﻿using Queries.DataAccess;
-using DataSeeder.DummyData;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+
+using Persistence.Access;
+using DataSeeder.DummyData;
 
 
 namespace DataSeeder;
@@ -23,21 +23,24 @@ public class Seeder
     {
         using (var scope = _serviceProvider.CreateScope())
         {
-            var accessor = scope.ServiceProvider.GetRequiredService<IDataAccessor>();
+            Console.WriteLine("Seeding Database");
+            var dbContext = scope.ServiceProvider.GetRequiredService<Context>();
 
-            Add(accessor, accessor.Manufacturers, _dummyDataProvider.Manufacturers);
-            Add(accessor, accessor.Models, _dummyDataProvider.Models);
+            dbContext.Database.Migrate();
+
+            Add(dbContext, dbContext.Manufacturers, _dummyDataProvider.Manufacturers);
+            Add(dbContext, dbContext.Models, _dummyDataProvider.Models);
         }
 
     }
 
-    private void Add<TEntity>(IDataAccessor accessor,
+    private void Add<TEntity>(Context dbContext,
                               DbSet<TEntity> set,
                               IEnumerable<TEntity> toAdd)
         where TEntity : class
     {
         set.AddRange(toAdd);
-        accessor.SaveChanges();
+        dbContext.SaveChanges();
     }
 
 }

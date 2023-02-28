@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpServer", "Server\HttpServer.csproj", "{6B6ED03D-ECE1-4D71-8035-8E18687849B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer", "ApiServer\ApiServer.csproj", "{6B6ED03D-ECE1-4D71-8035-8E18687849B2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5618EF01-8A8F-4BC2-BDA0-F1C7BDE70572} = {5618EF01-8A8F-4BC2-BDA0-F1C7BDE70572}
 	EndProjectSection
@@ -31,7 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6692E5B4-A843-4744-A341-E6A199558E96}"
 EndProject
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Queries", "Infrastructure\Queries\Queries.csproj", "{18371BF8-E83F-43D0-89F5-02CAF36273BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{53D70850-AE6F-4F87-A702-7F0030B7511A}"
@@ -46,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{C274
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSeeder", "Infrastructure\DesignTime\DataSeeder\DataSeeder.csproj", "{77BA5F3B-8710-4A23-A7DC-1F287FF15038}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "VehicleBackEnd", "VehicleBackEnd.dcproj", "{C48D301B-E2CC-4E5C-A5E4-552F172DCEBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +86,10 @@ Global
 		{77BA5F3B-8710-4A23-A7DC-1F287FF15038}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77BA5F3B-8710-4A23-A7DC-1F287FF15038}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77BA5F3B-8710-4A23-A7DC-1F287FF15038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C48D301B-E2CC-4E5C-A5E4-552F172DCEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48D301B-E2CC-4E5C-A5E4-552F172DCEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48D301B-E2CC-4E5C-A5E4-552F172DCEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48D301B-E2CC-4E5C-A5E4-552F172DCEBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

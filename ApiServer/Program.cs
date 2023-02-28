@@ -11,15 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddErrorHandler()
     .AddApi()
-    .AddApplication(builder.Configuration)
+    .AddApplication()
     .AddQueries()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure();
 
 var app = builder.Build();
 
 
-/*if (app.Environment.IsDevelopment())
-    new Seeder(app.Services).Start();*/
+if (app.Environment.IsDevelopment())
+    new Seeder(app.Services).Start();
+
 
 app.UseRouting();
 app.MapControllers();

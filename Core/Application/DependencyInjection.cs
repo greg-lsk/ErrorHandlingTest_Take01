@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 using Application.Authentication.Login;
 using Application.Authentication.Login.Contracts;
@@ -14,13 +13,13 @@ using Application.CarOwnership.GetUserCars.Contracts;
 using Application.CarOwnership.AddUserCar.Contracts;
 using Application.CarOwnership.AddUserCar;
 
+
 namespace Application;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
 
         services.AddTransient<ILoginService, LoginService>()

@@ -1,0 +1,30 @@
+version: '3.4'
+
+networks:
+    vehicle-backEnd:
+
+services:
+  dbserver:
+    container_name: app-database
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports: 
+        - 8002:1433
+    environment:
+        - ACCEPT_EULA=Y
+        - MSSQL_SA_PASSWORD=STRONG_paSSw0rd
+    networks:
+        - vehicle-backEnd
+  apiserver:
+    container_name: app-api
+    image: ${DOCKER_REGISTRY-}apiserver
+    build:
+      context: .
+      dockerfile: ApiServer/Dockerfile
+    depends_on:
+        - dbserver
+    environment:
+        - DB_HOST=dbserver
+        - DB_NAME=VehicleBackEndDb
+        - DB_SA_PASSWORD=STRONG_paSSw0rd  
+    networks:
+        - vehicle-backEnd
