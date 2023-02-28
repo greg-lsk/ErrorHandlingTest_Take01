@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\DesignTime\DataSeeder\DataSeeder.csproj" />
-    <ProjectReference Include="..\Infrastructure\Persistence\Persistence.csproj" />
+    <ProjectReference Include="..\Infrastructure\ModelDirector\ModelDirector.csproj" />
     <ProjectReference Include="..\Infrastructure\Queries\Queries.csproj" />
     <ProjectReference Include="..\Presentation\Api\Api.csproj" />
   </ItemGroup>
