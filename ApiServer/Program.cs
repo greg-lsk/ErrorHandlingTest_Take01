@@ -1,8 +1,8 @@
 using Api;
 using Application;
-using DataSeeder;
 using ErrorHandler.Utills;
-using Persistence;
+using ORM.Persistence;
+using ORM.Utills.DataSeeder;
 using Queries;
 
 

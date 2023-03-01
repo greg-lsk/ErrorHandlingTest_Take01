@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Persistence.Access;
+using ORM.Persistence;
+
 
 #nullable disable
 
-namespace Persistence.Migrations
+namespace ORM.Utills.Migrations
 {
-    [DbContext(typeof(Context))]
+    [DbContext(typeof(ModelDirector))]
     [Migration("20230130231739_InitialCreate")]
     partial class InitialCreate
     {

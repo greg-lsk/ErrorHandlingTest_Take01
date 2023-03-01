@@ -1,17 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
-using Persistence.Access;
 using Queries.DataAccess;
 
 
-namespace Persistence;
+namespace ORM.Persistence;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddDbContext<Context>();
-        services.AddScoped<IDataAccessor, Context>();
+        services.AddDbContext<ModelDirector>();
+        services.AddScoped<IDataAccessor, ModelDirector>();
 
         return services;
     }
