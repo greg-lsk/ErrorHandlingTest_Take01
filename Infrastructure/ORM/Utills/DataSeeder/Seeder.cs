@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-using Persistence.Access;
 using DataSeeder.DummyData;
+using ORM.Persistence;
 
-
-namespace DataSeeder;
+namespace ORM.Utills.DataSeeder;
 
 public class Seeder
 {
@@ -24,7 +23,7 @@ public class Seeder
         using (var scope = _serviceProvider.CreateScope())
         {
             Console.WriteLine("Seeding Database");
-            var dbContext = scope.ServiceProvider.GetRequiredService<Context>();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ModelDirector>();
 
             dbContext.Database.Migrate();
 
@@ -34,7 +33,7 @@ public class Seeder
 
     }
 
-    private void Add<TEntity>(Context dbContext,
+    private void Add<TEntity>(ModelDirector dbContext,
                               DbSet<TEntity> set,
                               IEnumerable<TEntity> toAdd)
         where TEntity : class

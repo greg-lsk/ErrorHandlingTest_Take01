@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ModelDirector\ModelDirector.csproj" />
-    <ProjectReference Include="..\..\Queries\Queries.csproj" />
+    <ProjectReference Include="..\..\..\Queries\Queries.csproj" />
+    <ProjectReference Include="..\..\ModelDirector\Persistence.csproj" />
   </ItemGroup>
 
 </Project>

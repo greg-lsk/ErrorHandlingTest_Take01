@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Persistence.Configuration;
+namespace ORM.Persistence.Configuration;
 
 internal class CarOwnershipConfigurator : IEntityTypeConfiguration<CarOwnership>
 {
