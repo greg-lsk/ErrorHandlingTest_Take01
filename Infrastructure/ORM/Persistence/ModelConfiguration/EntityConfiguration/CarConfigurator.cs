@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace ORM.Persistence.Configuration;
+namespace ORM.Persistence.ModelConfiguration;
 
 internal class CarConfigurator : IEntityTypeConfiguration<Car>
 {
     public void Configure(EntityTypeBuilder<Car> builder)
     {
-/*        builder
-            .Property(car => car.Model)
-            .IsRequired();*/
+        /*        builder
+                    .Property(car => car.Model)
+                    .IsRequired();*/
     }
 }

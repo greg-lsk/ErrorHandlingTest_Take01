@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace ORM.Persistence.Configuration;
+namespace ORM.Persistence.ModelConfiguration;
 
 internal class UserConfigurator : IEntityTypeConfiguration<User>
 {

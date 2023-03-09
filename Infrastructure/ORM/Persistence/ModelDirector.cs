@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Domain.Entities;
-using ORM.Persistence.Configuration;
+using ORM.Persistence.ModelConfiguration;
 using Queries.DataAccess;
 
 
@@ -28,7 +28,10 @@ public class ModelDirector : DbContext, IDataAccessor
         var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
 
         var connectionString =
-            $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=True";
+            $"Data Source={dbHost};" +
+            $"Initial Catalog={dbName};" +
+            $"User ID=sa;Password={dbPassword};" +
+            $"TrustServerCertificate=True";
 
         optionsBuilder.UseSqlServer(
             connectionString,
@@ -39,13 +42,7 @@ public class ModelDirector : DbContext, IDataAccessor
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
-        builder
-            .ApplyConfiguration(new UserConfigurator())
-            .ApplyConfiguration(new CarManufacturerConfigurator())
-            .ApplyConfiguration(new CarModelConfigurator())
-            .ApplyConfiguration(new CarConfigurator())
-            .ApplyConfiguration(new CarOwnershipConfigurator());
+        new ModelConfigurator(builder);
     }
 
 }
