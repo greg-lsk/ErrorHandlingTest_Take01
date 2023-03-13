@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include=".DataSource\IDataSource.cs" />
+    <Compile Include=".DataSource\IDataStateTracker.cs" />
     <Compile Include=".GuidRequest\GuidRequest.cs" />
     <Compile Include=".GuidRequest\IGuidRequest.cs" />
     <Compile Include="CarManufacturer\.TransferObject\IManufacturerDTO.cs" />

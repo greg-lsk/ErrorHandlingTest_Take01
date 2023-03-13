@@ -3,17 +3,14 @@ using Application;
 using ErrorHandler.Utills;
 using ORM.Persistence;
 using ORM.Utills.DataSeeder;
-using Queries;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddErrorHandler()
-    .AddApi()
-    .AddApplication()
-    .AddQueries()
-    .AddInfrastructure();
+builder.Services.AddErrorHandler()
+                .AddApi()
+                .AddApplication()
+                .AddInfrastructure();
 
 var app = builder.Build();
 

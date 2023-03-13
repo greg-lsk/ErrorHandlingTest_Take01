@@ -8,7 +8,6 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ApiServer/ApiServer.csproj", "ApiServer/"]
 COPY ["Infrastructure/DesignTime/DataSeeder/DataSeeder.csproj", "Infrastructure/DesignTime/DataSeeder/"]
-COPY ["Infrastructure/Queries/Queries.csproj", "Infrastructure/Queries/"]
 COPY ["Core/Application/Application.csproj", "Core/Application/"]
 COPY ["Core/Domain/Domain.csproj", "Core/Domain/"]
 COPY ["Core/Tools/Result/ErrorHandler.csproj", "Core/Tools/Result/"]

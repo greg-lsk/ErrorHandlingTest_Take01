@@ -1,4 +1,7 @@
 ﻿using ErrorHandler;
+using BusinessModel = Domain.Entities;
+using Application.DataSource;
+using Application.CarManufacturer.TransferObject;
 using Application.CarManufacturer.GetManufacturers.Errors;
 using Application.CarManufacturer.GetManufacturers.Contracts;
 
@@ -7,27 +10,39 @@ namespace Application.CarManufacturer.GetManufacturers;
 
 internal class GetManufacturersService : IGetManufacturersService
 {
-    private readonly IGetManufacturersQueries _queries;
-    private readonly IFilteringService _filterService;
+    private readonly IDataSource _dataSource;
+    private readonly IDataStateTracker _dataStateTracker;
+    private readonly IFilteringService _filteringService;
 
 
-    public GetManufacturersService(IGetManufacturersQueries queries,
-                                   IFilteringService filterService)
+    public GetManufacturersService(IDataSource dataSource,
+                                   IDataStateTracker dataStateTracker,
+                                   IFilteringService service)
     {
-        _queries = queries;
-        _filterService = filterService;
+        _filteringService = service;
+        _dataStateTracker = dataStateTracker;
+        _dataSource = dataSource;
     }
 
 
     public IResult<IGetManufacturersResponce> Run()
     {
-        var responce = _queries.GetManufacturers();
+        _dataStateTracker.DisableTracking();
+        IGetManufacturersResponce responce = new GetManufacturersResponce
+        (
+            _dataSource.Get<BusinessModel::CarManufacturer>()
+                       .Select(manufacturer => new ManufacturerDTO(
+                           manufacturer.Id,
+                           manufacturer.Name)
+                       )
+                       .ToList()
+        ); 
 
-        _filterService[typeof(GetManufacturersFilters)]
+        _filteringService[typeof(GetManufacturersFilters)]
             .Filter(responce)
             .Run();
 
-        return _filterService.YieldResult(responce);
+        return _filteringService.YieldResult(responce);
     }
 
 }

@@ -1,5 +1,7 @@
-﻿using Application.Authentication.Register.Contracts;
+﻿using Domain.Entities;
 using ErrorHandler.Traversable;
+using Application.DataSource;
+using Application.Authentication.Register.Contracts;
 
 
 namespace Application.Authentication.Register.Errors;
@@ -28,9 +30,10 @@ public sealed class RegisterRequestFilters : FilterChain<IRegisterRequest>
             request => request.Password.Length > 9,
             RegisterInfo.InvalidPasswordFormat);
 
-        AddFilter<IRegisterQueries>(
-            (request, queries) => queries.UserExists(request),
-            RegisterInfo.UserAlreadyExists);
+        AddFilter<IDataSource>(
+            (request, source) => source.Get<User>().Any(user=>user.Email==request.Email),
+            RegisterInfo.UserAlreadyExists
+            );
     }
 
 }

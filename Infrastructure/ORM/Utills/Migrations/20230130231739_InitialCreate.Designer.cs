@@ -12,7 +12,7 @@ using ORM.Persistence;
 
 namespace ORM.Utills.Migrations
 {
-    [DbContext(typeof(ModelDirector))]
+    [DbContext(typeof(BusinessModelDirector))]
     [Migration("20230130231739_InitialCreate")]
     partial class InitialCreate
     {

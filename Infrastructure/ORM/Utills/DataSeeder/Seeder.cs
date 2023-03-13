@@ -23,7 +23,7 @@ public class Seeder
         using (var scope = _serviceProvider.CreateScope())
         {
             Console.WriteLine("Seeding Database");
-            var dbContext = scope.ServiceProvider.GetRequiredService<ModelDirector>();
+            var dbContext = scope.ServiceProvider.GetRequiredService<BusinessModelDirector>();
 
             dbContext.Database.Migrate();
 
@@ -33,13 +33,13 @@ public class Seeder
 
     }
 
-    private void Add<TEntity>(ModelDirector dbContext,
+    private void Add<TEntity>(BusinessModelDirector dbContext,
                               DbSet<TEntity> set,
                               IEnumerable<TEntity> toAdd)
         where TEntity : class
     {
         set.AddRange(toAdd);
-        dbContext.SaveChanges();
+        dbContext.ApplyChanges();
     }
 
 }

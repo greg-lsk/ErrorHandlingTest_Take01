@@ -1,5 +1,8 @@
 ﻿using ErrorHandler;
+using BusinessModel = Domain.Entities;
+using Application.DataSource;
 using Application.GuidRequest;
+using Application.CarModel.TransferObject;
 using Application.CarModel.GetModels.Errors;
 using Application.CarModel.GetModels.Contracts;
 
@@ -8,21 +11,33 @@ namespace Application.CarModel.GetModels;
 
 internal class GetModelsService : IGetModelsService
 {
-    private readonly IGetModelsQueries _queries;
+    private readonly IDataSource _dataSource;
+    private readonly IDataStateTracker _dataStateTracker;
     private readonly IFilteringService _filteringService;
 
-
-    public GetModelsService(IGetModelsQueries queries,
-                            IFilteringService filteringService)
+    public GetModelsService(IDataSource dataSource,
+                            IDataStateTracker dataStateTracker,
+                            IFilteringService service)
     {
-        _queries = queries;
-        _filteringService = filteringService;
+        _filteringService = service;
+        _dataStateTracker = dataStateTracker;
+        _dataSource = dataSource;
     }
 
 
     public IResult<IGetModelsResponce> Run(IGuidRequest request)
     {
-        var responce = _queries.GetModelsOfManufacturer(request);
+        _dataStateTracker.DisableTracking();
+        IGetModelsResponce responce = new GetModelsResponce
+        (
+            _dataSource.Get<BusinessModel::CarModel>()
+                       .Where(model => model.Manufacturer.Id == request.Id)
+                       .Select(model => new CarModelDTO(model.Id,
+                                                        model.Name,
+                                                        $"{model.ProductionPeriod}")
+                       )
+                       .ToList()
+        );
 
         _filteringService[typeof(GetModelsFilters)]
             .Filter(responce)
@@ -30,4 +45,5 @@ internal class GetModelsService : IGetModelsService
 
         return _filteringService.YieldResult(responce);
     }
+    
 }

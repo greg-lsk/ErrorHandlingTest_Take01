@@ -1,37 +1,46 @@
-﻿using Application.Authentication.Common.Responce;
+﻿using ErrorHandler;
+using Domain.Entities;
+using Application.DataSource;
+using Application.Authentication.Common.Responce;
 using Application.Authentication.Register.Contracts;
 using Application.Authentication.Register.Errors;
-using ErrorHandler;
 
 
 namespace Application.Authentication.Register;
 
 internal class RegisterService : IRegisterService
 {
-
-    private readonly IRegisterQueries _queries;
+    private readonly IDataSource _dataSource;
+    private readonly IDataStateTracker _dataStateTracker;
     private readonly IFilteringService _filteringService;
 
 
-    public RegisterService(IRegisterQueries queries,
-                           IFilteringService filteringService)
+    public RegisterService(IDataSource dataSource,
+                        IDataStateTracker dataStateTracker,
+                        IFilteringService service)
     {
-        _queries = queries;
-        _filteringService = filteringService;
+        _filteringService = service;
+        _dataStateTracker = dataStateTracker;
+        _dataSource = dataSource;
     }
 
 
     public IResult<IAuthenticationResponce> Run(IRegisterRequest request)
     {
+        _dataStateTracker.DisableTracking();
         _filteringService[typeof(RegisterRequestFilters)]
             .Filter(request)
-            .Using(_queries)
+            .Using(_dataSource)
             .Run();
 
         if (_filteringService.Interrupted)
             return _filteringService.YieldResult<IAuthenticationResponce>(null);
 
-        var response = _queries.AddUser(request);
+        _dataStateTracker.EnableTracking();
+        var user = new User(request.Email, request.Password);
+        IAuthenticationResponce? response =
+            (AuthenticationResponce?)_dataSource.Add(user);
+        _dataStateTracker.ApplyChanges();
 
         return _filteringService.YieldResult(response);
     }

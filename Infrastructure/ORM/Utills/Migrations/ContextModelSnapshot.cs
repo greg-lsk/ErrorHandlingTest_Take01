@@ -10,7 +10,7 @@ using ORM.Persistence;
 
 namespace ORM.Utills.Migrations
 {
-    [DbContext(typeof(ModelDirector))]
+    [DbContext(typeof(BusinessModelDirector))]
     partial class ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

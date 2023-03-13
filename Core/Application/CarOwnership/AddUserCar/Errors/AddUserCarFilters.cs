@@ -13,9 +13,9 @@ public class AddUserCarFilters : FilterChain<IAddUserCarRequest>
 	{
 		SuccessInfo = AddUserCarInfo.SuccessfulUserCarRegistration;
 
-		AddFilter<IRegisterQueries>(
+/*		AddFilter<IRegisterQueries>(
 			(request, queries) => !queries.UserExists(request.UserId),
-			AddUserCarInfo.InvalidUser);
+			AddUserCarInfo.InvalidUser);*/
 
 		//Check if Model is Valid
 	}

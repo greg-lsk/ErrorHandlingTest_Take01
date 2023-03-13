@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using Domain.Entities;
+using Application.DataSource;
 using ORM.Persistence.ModelConfiguration;
-using Queries.DataAccess;
 
 
 namespace ORM.Persistence;
 
-public class ModelDirector : DbContext, IDataAccessor
+public class BusinessModelDirector : DbContext, IDataSource, IDataStateTracker
 {
     public DbSet<User> Users { get; set; }
     public DbSet<CarManufacturer> Manufacturers { get; set; }
@@ -16,7 +16,7 @@ public class ModelDirector : DbContext, IDataAccessor
     public DbSet<CarOwnership> CarOwnerships { get; set; }
 
 
-    public ModelDirector(DbContextOptions<ModelDirector> options) : base(options) { }
+    public BusinessModelDirector(DbContextOptions<BusinessModelDirector> options) : base(options) { }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -39,10 +39,34 @@ public class ModelDirector : DbContext, IDataAccessor
         );
     }
 
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         new ModelConfigurator(builder);
     }
 
+    public IQueryable<TEntity> Get<TEntity>()
+        where TEntity:class
+    {
+        return Set<TEntity>().AsQueryable();
+    }
+
+    public new TEntity Add<TEntity>(TEntity entity)
+        where TEntity:class
+    {
+        var added = Set<TEntity>().Add(entity);
+        return added.Entity;
+    }
+
+
+    public void EnableTracking()
+        => ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+    
+    public void DisableTracking()
+        => ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+    
+    public int ApplyChanges()
+        => SaveChanges();
+    
 }
